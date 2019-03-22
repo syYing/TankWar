@@ -53,7 +53,7 @@ public class TankClient extends Frame{
         this.setVisible(true);
         
         new Thread(new PaintThread()).start();
-        this.addKeyListener(new KeyMonitor());
+        this.addKeyListener(new KeyMonitor()); // 设置键盘监听
     }
 
     @Override
