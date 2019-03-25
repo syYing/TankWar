@@ -11,23 +11,25 @@ import java.util.Random;
 
 public class Tank {
 
+    // 坦克大小
     private static final int WIDTH = 30;
     private static final int HEIGHT = 30;
+    // 坦克横向速度与纵向速度
     private static final int XSPEED = 5;
     private static final int YSPEED = 5;
 
     private int x, y;
     private int oldX, oldY;
     private boolean bL, bU, bR, bD;
-    public enum Direction { L, LU, U, RU, R, RD, D, LD, STOP };
+    public enum Direction { L, LU, U, RU, R, RD, D, LD, STOP }; // 八个移动方向
     private Direction dir = Direction.STOP;
     private Direction gunDir = Direction.D;
-    private boolean good;
-    private boolean live = true;
-    private int HP = 100;
+    private boolean good; // 坦克阵营标志
+    private boolean live = true; // 坦克存活标志
+    private int HP = 100; // 主坦克血量
 
     private Random r = new Random();
-    private int step = r.nextInt(7) + 3;
+    private int step = r.nextInt(7) + 3; // 敌方坦克随即移动步数
 
     private TankClient tc;
 
@@ -226,6 +228,7 @@ public class Tank {
         dealTankBorder();
     }
 
+    // 处理坦克越界问题
     private void dealTankBorder() {
         if(x < 0) {
             x = 0;
@@ -297,6 +300,7 @@ public class Tank {
         }
     }
 
+    // 坦克体积碰撞
     public void acrossWithTank(Tank tk) {
         if(live && tk.isLive() && getRect().intersects(tk.getRect())) {
             if(good != tk.isGood()) {
